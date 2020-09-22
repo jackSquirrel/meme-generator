@@ -6,8 +6,19 @@ class MemeGenerator extends React.Component {
         this.state = {
             topText: "",
             bottomText: "",
-            randomImage: "http://i.imgflip.com/1bij.jpg"
+            randomImage: "http://i.imgflip.com/1bij.jpg",
+            allMemesImgs: []
         }
+    }
+
+    componentDidMount() {
+        fetch("https://api.imgflip.com/get_memes")
+            .then(res => res.json())
+            .then((res)=>{
+                const memes = res.data.memes
+                console.log(memes[1])
+                this.setState({allMemesImgs: memes})
+            })
     }
 
     render() {
